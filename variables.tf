@@ -79,3 +79,11 @@ variable "tgw_route" {
     error_message = "A route must be specified for the transit gateway."
   }
 }
+
+# VPX
+variable "vpc_peer" {
+  description = "The IDs of the external VPC to peer with."
+  type        = list(string)
+  default     = []
+}
+

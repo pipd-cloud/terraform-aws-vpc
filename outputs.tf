@@ -17,3 +17,8 @@ output "tgw" {
   description = "The transit gateway associated with the VPC."
   value       = var.tgw != null ? module.tgw.tgw : null
 }
+
+output "vpx" {
+  description = "The VPC peering connections."
+  value       = length(var.vpc_peer) > 0 ? module.vpx.vpx[*] : []
+}

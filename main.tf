@@ -20,3 +20,12 @@ module "tgw" {
   tgw       = var.tgw
   tgw_route = var.tgw_route
 }
+
+module "vpx" {
+  count    = length(var.vpc_peer)
+  source   = "./modules/vpx"
+  id       = var.id
+  aws_tags = var.aws_tags
+  vpc      = module.vpc.vpc.id
+  vpx      = var.vpc_peer[count.index]
+}
