@@ -20,5 +20,5 @@ output "tgw" {
 
 output "vpx" {
   description = "The VPC peering connections."
-  value       = length(var.vpc_peer) > 0 ? module.vpx.vpx[*] : []
+  value       = length(var.vpc_peer) > 0 ? module.vpx.vpx : []
 }
