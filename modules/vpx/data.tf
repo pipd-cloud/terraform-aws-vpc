@@ -8,14 +8,14 @@ data "aws_vpc" "vpx" {
 
 data "aws_subnets" "vpc" {
   filter {
-    name   = "vpi-id"
+    name   = "vpc-id"
     values = [data.aws_vpc.vpc.id]
   }
 }
 
 data "aws_subnets" "vpx" {
   filter {
-    name   = "vpi-id"
+    name   = "vpc-id"
     values = [data.aws_vpc.vpx.id]
   }
 }
