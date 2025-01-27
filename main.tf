@@ -12,20 +12,22 @@ module "vpc" {
 }
 
 module "tgw" {
-  count     = var.tgw != null ? 1 : 0
-  source    = "./modules/tgw"
-  id        = var.id
-  aws_tags  = var.aws_tags
-  vpc       = module.vpc.vpc.id
-  tgw       = var.tgw
-  tgw_route = var.tgw_route
+  depends_on = [module.vpc]
+  count      = var.tgw != null ? 1 : 0
+  source     = "./modules/tgw"
+  id         = var.id
+  aws_tags   = var.aws_tags
+  vpc        = module.vpc.vpc.id
+  tgw        = var.tgw
+  tgw_route  = var.tgw_route
 }
 
 module "vpx" {
-  count    = length(var.vpc_peer)
-  source   = "./modules/vpx"
-  id       = var.id
-  aws_tags = var.aws_tags
-  vpc      = module.vpc.vpc.id
-  vpx      = var.vpc_peer[count.index]
+  depends_on = [module.vpc]
+  count      = length(var.vpc_peer)
+  source     = "./modules/vpx"
+  id         = var.id
+  aws_tags   = var.aws_tags
+  vpc        = module.vpc.vpc.id
+  vpx        = var.vpc_peer[count.index]
 }
