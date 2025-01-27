@@ -12,13 +12,13 @@ data "aws_vpc" "main" {
   id = var.vpc
 }
 
-data "aws_subnets" "all" {
+data "aws_subnets" "vpc" {
   filter {
     name   = "vpi-id"
     values = [data.aws_vpc.main.id]
   }
 }
 
-data "aws_route_tables" "all" {
+data "aws_route_tables" "vpc" {
   vpc_id = data.aws_vpc.main.id
 }

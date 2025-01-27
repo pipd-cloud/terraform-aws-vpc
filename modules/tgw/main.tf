@@ -1,7 +1,7 @@
 resource "aws_ec2_transit_gateway_vpc_attachment" "main" {
   transit_gateway_id                 = data.aws_ec2_transit_gateway.external.id
   vpc_id                             = data.aws_vpc.main.id
-  subnet_ids                         = keys(data.aws_subnets.all)
+  subnet_ids                         = keys(data.aws_subnets.vpc)
   dns_support                        = "enable"
   security_group_referencing_support = "enable"
   tags = merge({
