@@ -12,7 +12,6 @@ module "vpc" {
 }
 
 module "tgw" {
-  depends_on = [module.vpc]
   count      = var.tgw != null ? 1 : 0
   source     = "./modules/tgw"
   id         = var.id
@@ -23,7 +22,6 @@ module "tgw" {
 }
 
 module "vpx" {
-  depends_on = [module.vpc]
   count      = length(var.vpc_peer)
   source     = "./modules/vpx"
   id         = var.id

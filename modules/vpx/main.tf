@@ -10,6 +10,7 @@ resource "aws_vpc_peering_connection" "vpx" {
 }
 
 resource "aws_route" "vpc" {
+  depends_on                = [data.aws_route_tables.vpc]
   for_each                  = toset(data.aws_route_tables.vpc.ids)
   route_table_id            = each.value
   vpc_peering_connection_id = aws_vpc_peering_connection.vpx.id
@@ -17,6 +18,7 @@ resource "aws_route" "vpc" {
 }
 
 resource "aws_route" "vpx" {
+  depends_on                = [data.aws_route_tables.vpx]
   for_each                  = toset(data.aws_route_tables.vpx.ids)
   route_table_id            = each.value
   vpc_peering_connection_id = aws_vpc_peering_connection.vpx.id
