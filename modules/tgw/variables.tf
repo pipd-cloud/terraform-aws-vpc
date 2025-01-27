@@ -28,3 +28,10 @@ variable "vpc" {
   description = "The ID of the VPC."
   type        = string
 }
+
+variable "vpc_subnets" {
+  type        = number
+  nullable    = true
+  default     = null
+  description = "The number of public-private subnet pairs to create. Cannot be greater than the number of AZ in this region."
+}

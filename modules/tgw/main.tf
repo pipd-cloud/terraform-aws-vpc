@@ -11,8 +11,11 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "main" {
 }
 
 resource "aws_route" "tgw" {
-  for_each               = data.aws_route_tables.all
-  route_table_id         = each.key
+  # 1 route table for the public subnets
+  # N route tables for the private subnets
+  # 1 main route table
+  count                  = local.vpc_subnets + 2
+  route_table_id         = data.aws_route_tables.vpc.ids[count.index]
   transit_gateway_id     = data.aws_ec2_transit_gateway.external.id
   destination_cidr_block = var.tgw_route
 }
