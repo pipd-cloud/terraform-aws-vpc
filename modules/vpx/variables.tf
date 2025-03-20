@@ -30,3 +30,10 @@ variable "vpx" {
   description = "The ID of the VPC to peer with the main VPC."
   type        = string
 }
+
+variable "vpx_owner_id" {
+  description = "AWS account ID of the peering connection."
+  type = string
+  nullable = true
+  default = null
+}

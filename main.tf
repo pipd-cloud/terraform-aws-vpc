@@ -31,3 +31,14 @@ module "vpx" {
   vpc_subnets = var.vpc_subnets
   vpx         = var.vpc_peer[count.index]
 }
+
+module "vpx_external" {
+  for_each = var.vpc_peer_external
+  source = "./modules/vpx"
+  id     = var.id
+  aws_tags = var.aws_tags
+  vpc = module.vpc.vpc.id
+  vpc_subnets = var.vpc_subnets
+  vpx = each.value
+  vpx_owner_id = each.key
+}

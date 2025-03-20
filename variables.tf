@@ -87,3 +87,8 @@ variable "vpc_peer" {
   default     = []
 }
 
+variable "vpc_peer_external" {
+  description = "The IDs of the VPCs to peer to on external accounts."
+  type = map(string)
+  default     = {}
+}
